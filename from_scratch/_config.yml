@@ -13,16 +13,7 @@ logo                        : logo.png  # A path to the book logo
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
-
-# Define the name of the latex output file for PDF builds
-latex:
-  latex_documents:
-    targetname: book.tex
-
-# Add a bibtex file so that we can create citations
-bibtex_bibfiles:
-  - references.bib
+  execute_notebooks: auto
 
 # Information about where the book exists on the web
 repository:
