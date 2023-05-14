@@ -153,6 +153,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="event_loop/intro.html">Event loop</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="event_loop/threading.html">Running in parallel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="event_loop/simple_scheduler.html">A simple scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_loop/producer_consumer.html">Producer consumer problem</a></li>
 </ul>
 </li>
 </ul>
@@ -353,12 +354,16 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="from-scratch">
 <h1>From scratch<a class="headerlink" href="#from-scratch" title="Permalink to this heading">#</a></h1>
 <blockquote>
-<div><p>What you can’t build, you do not understand</p>
+<div><p>What you can’t build, you do not understand - Richard Feynman</p>
 </div></blockquote>
+<p>Every chapter in this book deep dives into one specific fundamental topic in computer science and tries to make a simple implementation of the idea from scratch. We’ll start off with a problem and go through the journey of finding the details on the ideas behind the implementation.</p>
+<p>All the implementations will be runnable python notebooks and at the end, we’ll have a functional implementation of what we set out to build.</p>
 <p>Here’s a pretty ambitious checklist of what I intend to write on</p>
 <ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> event loop (in progress)</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> TOTP</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Event loop (chapter one, in progress)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Hashing</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Encoding</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Asymmetric encryption</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> DNS</p></li>
 </ul>
 <div class="toctree-wrapper compound">
