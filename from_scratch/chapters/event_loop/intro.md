@@ -1,6 +1,4 @@
-# Event loop
-
-## An Introduction
+## Event loop
 
 If you have ever used something along the lines of async/await, futures or promises, you have used an event loop.
 
