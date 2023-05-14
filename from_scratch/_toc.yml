@@ -5,3 +5,4 @@ chapters:
   sections:
   - file: chapters/event_loop/threading
   - file: chapters/event_loop/simple_scheduler
+  - file: chapters/event_loop/producer_consumer
