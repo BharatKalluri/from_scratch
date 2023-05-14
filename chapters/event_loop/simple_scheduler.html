@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>A simple scheduler &#8212; From Scratch</title>
+    <title>1.2. A simple scheduler &#8212; From Scratch</title>
   
   
   
@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/event_loop/simple_scheduler';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Producer consumer problem" href="producer_consumer.html" />
-    <link rel="prev" title="Running in parallel" href="threading.html" />
+    <link rel="next" title="1.3. Producer consumer problem" href="producer_consumer.html" />
+    <link rel="prev" title="1.1. Running in parallel" href="threading.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -151,10 +151,11 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Event loop</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="threading.html">Running in parallel</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">A simple scheduler</a></li>
-<li class="toctree-l2"><a class="reference internal" href="producer_consumer.html">Producer consumer problem</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">1. Event loop</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="threading.html">1.1. Running in parallel</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2. A simple scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="producer_consumer.html">1.3. Producer consumer problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="credits.html">1.4. Credits</a></li>
 </ul>
 </li>
 </ul>
@@ -350,8 +351,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dissecting-on-what-is-a-scheduler">Dissecting on what is a scheduler</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-sequencing">Time sequencing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dissecting-on-what-is-a-scheduler">1.2.1. Dissecting on what is a scheduler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-sequencing">1.2.2. Time sequencing</a></li>
 </ul>
             </nav>
         </div>
@@ -364,12 +365,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="a-simple-scheduler">
-<h1>A simple scheduler<a class="headerlink" href="#a-simple-scheduler" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">1.2. </span>A simple scheduler<a class="headerlink" href="#a-simple-scheduler" title="Permalink to this heading">#</a></h1>
 <p>If the function is just not doing anything, why do I have to keep the CPU idle?</p>
 <p>Let’s spin up a simple scheduler and let the scheduler know that CPU is idle. And the scheduler can then start by looking if there is any other work to do, if yes then do it. Simple.</p>
 <p>But for the first take, let’s keep sleep around and see how to interleave the calls</p>
 <section id="dissecting-on-what-is-a-scheduler">
-<h2>Dissecting on what is a scheduler<a class="headerlink" href="#dissecting-on-what-is-a-scheduler" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.2.1. </span>Dissecting on what is a scheduler<a class="headerlink" href="#dissecting-on-what-is-a-scheduler" title="Permalink to this heading">#</a></h2>
 <p>A scheduler is a setup which can take in requests and schedule them at a fixed sequence. Think of it as an orchestrator. It takes in requests and queues them up for execution.</p>
 <p>Observe the word queue, the scheduler is essentially a queue which maintains a list of executables and executes them. Python natively has <code class="docutils literal notranslate"><span class="pre">deque</span></code> for queuing, let’s build a scheduler using <code class="docutils literal notranslate"><span class="pre">deque</span></code>.</p>
 <div class="cell docutils container">
@@ -474,7 +475,7 @@ document.write(`
 <p>But still, during sleep the thread is just idle! That is not acceptable, we’ll need to change that now!</p>
 </section>
 <section id="time-sequencing">
-<h2>Time sequencing<a class="headerlink" href="#time-sequencing" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.2.2. </span>Time sequencing<a class="headerlink" href="#time-sequencing" title="Permalink to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">time.sleep</span></code> is blocking. During that time, the CPU is not really doing anything. If we can let the scheduler know, then the scheduler can instead run something in that time box.</p>
 <p>Let’s add a new function to the scheduler called <code class="docutils literal notranslate"><span class="pre">call_later</span></code> which will <em>schedule</em> a call to the function after some time. Not sleep, but schedule. And during the free time, it can keep looping around and running functions in its queue.</p>
 <p>But how can we pull that off?</p>
@@ -619,7 +620,7 @@ up 4
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Running in parallel</p>
+        <p class="prev-next-title"><span class="section-number">1.1. </span>Running in parallel</p>
       </div>
     </a>
     <a class="right-next"
@@ -627,7 +628,7 @@ up 4
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Producer consumer problem</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Producer consumer problem</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -649,8 +650,8 @@ up 4
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dissecting-on-what-is-a-scheduler">Dissecting on what is a scheduler</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-sequencing">Time sequencing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dissecting-on-what-is-a-scheduler">1.2.1. Dissecting on what is a scheduler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-sequencing">1.2.2. Time sequencing</a></li>
 </ul>
   </nav></div>
 
